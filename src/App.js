@@ -18,22 +18,27 @@ class App extends Component{
         this.percentarray=[50,60,90];
     }
 
+    //得分在组件内部由函数确定，而百分比是决定得分的因素，所以只有百分比在state里
+    //edit只有0，1两个值，1代表可以编辑，0代表不能编辑，因为涉及多个子控件的状态，所以写进父控件的state里
     state={
         percent:15,
         edit:0,
     }
 
+    //计算百分比和得分换算的函数
     Score_cal=(perc)=>{
         const score=(perc/10+0.5).toFixed(0);
         return score;
     }
 
+    //重设得分的函数
     Reset_Percent=(value)=>{
         this.setState({
             percent:value,
         })
     }
 
+    //切换edit的函数
     Switch_Edit=()=>{
         if(this.state.edit===0){
             this.setState({
@@ -46,6 +51,7 @@ class App extends Component{
         }
     }
 
+    //计算颜色值的函数
     Color_cal(res){
         const color=[0,0,0];
         const color0=[255,43,0];
@@ -95,8 +101,8 @@ class App extends Component{
     }
 
 
+    //以下render中，每个控件都被包装起来，并把相应的函数和状态值作为props传给下一级。这些在props图中可以体现，详见附带的ppt
     render(){
-        console.log("edit=",this.state.edit);
         return(
             <div className="App">
                 <ControlWindow>
@@ -117,6 +123,5 @@ class App extends Component{
         )
     }
 }
-//cjysb
 
 export default App;
